@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indoor Object Detection Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Accessibility AI</p>
+          <h1>Indoor Object Detection System for Visually Impaired Assistance</h1>
+          <p class="description">
+            Real-time indoor scene understanding with object detection, spoken alerts, and a live monitoring dashboard.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Flask</span>
+            <span class="badge">YOLO</span>
+            <span class="badge">OpenCV</span>
+            <span class="badge">Audio Alerts</span>
+          </div>
+        </div>
+        <aside class="status-panel">
+          <h2>System Settings</h2>
+          <ul>
+            <li><strong>Model:</strong> {{ settings.model_path }}</li>
+            <li><strong>Confidence:</strong> {{ settings.confidence_threshold }}</li>
+            <li><strong>Camera:</strong> {{ settings.camera_index }}</li>
+            <li><strong>Audio:</strong> {{ 'Enabled' if settings.enable_audio else 'Disabled' }}</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="dashboard">
+        <article class="card video-card">
+          <div class="section-header">
+            <h2>Live Camera Feed</h2>
+            <span id="health-indicator" class="pill">Checking…</span>
+          </div>
+          <img id="video-stream" src="{{ url_for('video_feed') }}" alt="Live object detection video stream" />
+        </article>
+
+        <article class="card detections-card">
+          <div class="section-header">
+            <h2>Current Detections</h2>
+            <button id="refresh-button" type="button">Refresh</button>
+          </div>
+          <ul id="detections-list" class="detections-list">
+            <li class="empty-state">Waiting for detected objects…</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="card workflow-card">
+        <h2>Implementation Workflow</h2>
+        <ol>
+          <li>Collect and validate an indoor object detection dataset.</li>
+          <li>Preprocess images and verify annotations.</li>
+          <li>Train or fine-tune a YOLO model for indoor environments.</li>
+          <li>Run real-time inference through webcam input.</li>
+          <li>Provide audio alerts for nearby objects and obstacles.</li>
+          <li>Deploy the application for demonstration and usability testing.</li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
